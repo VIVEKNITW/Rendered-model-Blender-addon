@@ -44,7 +44,7 @@ class Image_OT_objectstocenter(bpy.types.Operator):
         
             hide(bpy.data.objects[joined])
             hide_in_render(bpy.data.objects[joined])
-            change_to_render()
+            
 
         return {'FINISHED'}
     
@@ -114,7 +114,7 @@ class Image_OT_addlights(bpy.types.Operator):
 #        add_light4(rad)
         
         hidden_status()
-
+        change_to_render()
         return {'FINISHED'}
     
     
