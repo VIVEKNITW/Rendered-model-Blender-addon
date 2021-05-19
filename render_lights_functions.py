@@ -3,7 +3,7 @@ import bpy
 def add_light1(myvalue):
     bpy.ops.object.light_add(type='SUN', align='WORLD', location=(0, 0, 0))
     bpy.context.object.data.use_shadow = False
-
+    bpy.context.object.name = 'Light 1'
         
     bpy.context.scene.transform_orientation_slots[0].type = 'VIEW'
     bpy.ops.object.constraint_add(type='TRACK_TO')
@@ -25,6 +25,7 @@ def add_light2(myvalue):
     bpy.ops.object.light_add(type='SUN', align='WORLD', location=(0, 0, 0))
     bpy.context.object.data.use_shadow = False
 
+    bpy.context.object.name = 'Light 2'
         
     bpy.context.scene.transform_orientation_slots[0].type = 'VIEW'
     bpy.ops.object.constraint_add(type='TRACK_TO')
@@ -46,7 +47,8 @@ def add_light3(myvalue):
     bpy.ops.object.light_add(type='SUN', align='WORLD', location=(0, 0, 0))
     bpy.context.object.data.use_shadow = False
 
-        
+    bpy.context.object.name = 'Light 3'    
+
     bpy.context.scene.transform_orientation_slots[0].type = 'VIEW'
     bpy.ops.object.constraint_add(type='TRACK_TO')
     bpy.context.object.constraints["Track To"].target = bpy.data.objects["lights empty"]

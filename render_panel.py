@@ -1,6 +1,6 @@
 import bpy
 
-class Image(bpy.types.Panel):
+class Image_PT_Panel(bpy.types.Panel):
     """Creates a Panel in the Object properties window"""
     bl_label = "Image rendering"
     bl_idname = "Imagerendering_initialsetup"
@@ -18,6 +18,7 @@ class Image(bpy.types.Panel):
         row.operator("object.addcamera")
         
         row = layout.row()
+        # row.prop(context.camera, 'ortho_scale')
         row.prop(context.scene.camera.data, 'ortho_scale')
         row = layout.row()
         row.prop(context.scene.camera.data, 'shift_x')
@@ -26,7 +27,16 @@ class Image(bpy.types.Panel):
         
         row = layout.row()
         row.operator("object.addlight")
+
+        row = layout.row()
+        layout.prop(mytool, 'light_enum')
+
+        row = layout.row()
+        row.operator("object.changeenergy")
+        row.prop(bpy.context.object.data, 'energy')
+        # row = layout.row()
         
+
         row = layout.row()
         layout.prop(mytool, 'mat_enum')
         row = layout.row()

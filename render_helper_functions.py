@@ -25,28 +25,34 @@ def origin_to_gem(item):
     bpy.ops.object.origin_set(type = 'ORIGIN_CENTER_OF_VOLUME', center='MEDIAN')    
     
 
-def duplicate_items(my_list):
+def duplicate_items(my_list, joined):
+    deselect()
     duplicate_list = []
+    i = 1
     for item in my_list:
         select_activate(item)
         bpy.ops.object.duplicate_move()
+        bpy.context.object.name = joined + str(i)
         duplicate_list.append(bpy.context.object)
         deselect()
+        i+=1
     return duplicate_list
 
 
-def join_items(duplicate_list):
+def join_items(duplicate_list, joined):
+    deselect()
     for item in duplicate_list:
         select_activate(item)
                         
     bpy.ops.object.join()
-    bpy.context.object.name = 'joined'
+    bpy.context.object.name = joined
     
 
-def obj_to_org(obj):
+def add_empty(obj, joined):
     
     bpy.ops.object.empty_add(type='ARROWS')
-    bpy.context.object.name = 'empty_parent'
+    bpy.context.object.name = 'empty ' + joined
+    return 'empty ' + joined
 
 
 def make_child(my_list, empty):
@@ -146,8 +152,12 @@ def add_image(name):
 
 def add_material(obj, name):
 
+    
     mat_name = name + " " + obj + " Material"
     obj_mat_name = name + " " + obj
+
+    check_delete_material(obj_mat_name)
+
     mat_name = bpy.data.materials.new(name = obj_mat_name)
     mat_name.use_nodes = True
 
@@ -183,3 +193,49 @@ def change_to_render():
         for space in area.spaces:
             if space.type == 'VIEW_3D':
                 space.shading.type = my_shading
+
+
+def check_obj(obj):
+    items_list = [item.name for item in list(bpy.data.objects)]
+    if obj in items_list:
+        return True
+    else:
+        return False
+
+
+def check_delete_material(obj_mat_name):
+    existing_materials = [item.name for item in list(bpy.data.materials)]
+    if obj_mat_name in existing_materials:
+        bpy.data.materials.remove(bpy.data.materials[obj_mat_name])
+
+
+def delete_obj(obj):
+    deselect()
+    select_activate(obj)
+    bpy.ops.object.delete(use_global=False, confirm=False)
+
+
+def unhide_render(myList):
+    for obj in myList:
+        obj.hide_render = False
+
+
+def hide_in_render(obj):
+    obj.hide_render = True
+
+
+def delete_extra_objects(initial_objects_list_name):
+    del_objects = []
+    all_objects = [item.name for item in list(bpy.data.objects)]
+    for item in all_objects:
+        if item not in initial_objects_list_name:
+            del_objects.append(item)
+    
+        
+    for obj in del_objects:
+        try:
+            unhide(bpy.data.objects[obj])
+            select_activate(bpy.data.objects[obj])
+            bpy.ops.object.delete()
+        except:
+            pass
