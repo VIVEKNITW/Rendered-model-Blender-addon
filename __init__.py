@@ -25,10 +25,9 @@ bl_info = {
 import bpy
 from .render_user_input import RenderMyProperties
 from .render_panel import Image_PT_Panel
-from .render_operators import Image_OT_objectstocenter, Image_OT_addcamera, Image_OT_addlights, Image_OT_saveimage, Image_OT_Texture, Image_OT_Energy
+from .render_operators import Image_OT_objectstocenter, Image_OT_addcamera, Image_OT_addlights, Image_OT_saveimage, Image_OT_Texture, Image_OT_Energy, Image_OT_Clear
 
-
-classes = (RenderMyProperties, Image_PT_Panel, Image_OT_objectstocenter, Image_OT_addcamera, Image_OT_addlights, Image_OT_saveimage, Image_OT_Texture, Image_OT_Energy)
+classes = (RenderMyProperties, Image_PT_Panel, Image_OT_objectstocenter, Image_OT_addcamera, Image_OT_addlights, Image_OT_saveimage, Image_OT_Texture, Image_OT_Energy, Image_OT_Clear)
 
 
 def register():

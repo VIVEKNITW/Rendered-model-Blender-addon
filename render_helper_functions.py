@@ -171,7 +171,8 @@ def add_material(obj, name):
     img_texture.location = (-350, 0)
     output_node = mat_name.node_tree.nodes.new('ShaderNodeOutputMaterial')
     output_node.location = (350, 0)
-
+    if (name in ['Aluminium', 'Titanium']):
+        bsdf_node.inputs[4].default_value = 1
     mat_name.node_tree.links.new(img_texture.outputs[0], bsdf_node.inputs[0])
     mat_name.node_tree.links.new(bsdf_node.outputs[0], output_node.inputs[0])
     
@@ -193,6 +194,16 @@ def change_to_render():
         for space in area.spaces:
             if space.type == 'VIEW_3D':
                 space.shading.type = my_shading
+
+
+def change_to_solid():
+    my_areas = bpy.context.workspace.screens[0].areas
+    my_shading = 'SOLID'
+    for area in my_areas:
+        for space in area.spaces:
+            if space.type == 'VIEW_3D':
+                space.shading.type = my_shading
+
 
 
 def check_obj(obj):

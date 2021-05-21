@@ -1,7 +1,7 @@
 import bpy
 import math
 rad = -1
-from .render_helper_functions import deselect, duplicate_items, join_items, origin_to_gem, make_child, emptytocenter, hide, select_activate, white_background, camera_view, hidden_status, add_material, change_to_render, check_obj, unhide, delete_obj, add_empty, unhide_render, hide_in_render, delete_extra_objects
+from .render_helper_functions import deselect, duplicate_items, join_items, origin_to_gem, make_child, emptytocenter, hide, select_activate, white_background, camera_view, hidden_status, add_material, change_to_render, check_obj, unhide, delete_obj, add_empty, unhide_render, hide_in_render, delete_extra_objects, change_to_solid
 from .render_lights_functions import add_light1, add_light2, add_light3, add_light4
 
 
@@ -115,6 +115,7 @@ class Image_OT_addlights(bpy.types.Operator):
         
         hidden_status()
         change_to_render()
+        
         return {'FINISHED'}
     
     
@@ -139,8 +140,8 @@ class Image_OT_saveimage(bpy.types.Operator):
         scene.render.filepath = filepath+filename
         bpy.ops.render.render(write_still = 1)
 
-        delete_extra_objects(initial_objects_list_name)
         
+        change_to_solid()
 
         return {'FINISHED'}
 
@@ -195,5 +196,18 @@ class Image_OT_Energy(bpy.types.Operator):
         elif mytool.light_enum == 'L3':
             select_activate(bpy.data.objects["Light 3"])
         
+
+        return {'FINISHED'}
+
+
+class Image_OT_Clear(bpy.types.Operator):
+    """ """
+    bl_label = "Clear"
+    bl_idname = "object.clear"
+    bl_options = {"REGISTER", "UNDO"}
+    
+    def execute(self, context):
+               
+        delete_extra_objects(initial_objects_list_name)     
 
         return {'FINISHED'}

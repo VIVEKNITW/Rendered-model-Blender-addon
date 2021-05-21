@@ -49,3 +49,6 @@ class Image_PT_Panel(bpy.types.Panel):
         
         row = layout.row()
         row.operator("object.saveimage")
+
+        row = layout.row()
+        row.operator("object.clear")     
