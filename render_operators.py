@@ -2,7 +2,7 @@ import bpy
 import math
 rad = -1
 from .render_helper_functions import deselect, duplicate_items, join_items, origin_to_gem, make_child, emptytocenter, hide, select_activate, white_background, camera_view, hidden_status, add_material, change_to_render, check_obj, unhide, delete_obj, add_empty, unhide_render, hide_in_render, delete_extra_objects, change_to_solid
-from .render_lights_functions import add_light1, add_light2, add_light3, add_light4
+from .render_lights_functions import add_light1, add_light2, add_light3
 
 
 class Image_OT_objectstocenter(bpy.types.Operator):
