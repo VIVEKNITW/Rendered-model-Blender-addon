@@ -111,11 +111,10 @@ class Image_OT_addlights(bpy.types.Operator):
             delete_obj(bpy.data.objects['Light 3'])
         add_light3(rad)
         
-#        add_light4(rad)
         
         hidden_status()
         change_to_render()
-        
+
         return {'FINISHED'}
     
     
